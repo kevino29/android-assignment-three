@@ -30,14 +30,13 @@ public class ItemDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private DummyContent.ImageItem mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ItemDetailFragment() {
-    }
+    public ItemDetailFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,7 @@ public class ItemDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.details);
+            ((TextView) rootView.findViewById(R.id.item_detail)).setText("Stub!!");
         }
 
         return rootView;
