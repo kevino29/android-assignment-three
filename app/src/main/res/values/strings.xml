@@ -2,17 +2,16 @@
     <string name="app_name">Assignment3</string>
     <string name="title_item_detail">Item Detail</string>
     <string-array name="images">
-        <item>pexels_anna_urlapova_2968780</item>
-        <item>pexels_daniela_constantini_5591724</item>
-        <item>pexels_evie_shaffer_2512386</item>
-        <item>pexels_khoa_v_5430083</item>
-        <item>pexels_luiisrtz_1699290</item>
-        <item>pexels_maksim_goncharenok_5995311</item>
-        <item>pexels_marta_dzedyshko_2775859</item>
+        <item>pexels_allec_gomes_4978722</item>
+        <item>pexels_drew_anderson_5603558</item>
+        <item>pexels_evg_culture_1170986</item>
+        <item>pexels_josh_hild_5921872</item>
+        <item>pexels_nadezhda_moryak_4630007</item>
+        <item>pexels_nick_bondarev_4738272</item>
         <item>pexels_oleg_zaicev_4834899</item>
-        <item>pexels_pat_whelen_5614594</item>
-        <item>pexels_ready_made_4297820</item>
-        <item>pexels_stephane_navailles_3415410</item>
+        <item>pexels_olenka_sergienko_5686482</item>
+        <item>pexels_polina_tankilevitch_5848854</item>
+        <item>pexels_roman_odintsov_5327805</item>
     </string-array>
     <string name="image_description">This image is from pexels.com</string>
 </resources>
