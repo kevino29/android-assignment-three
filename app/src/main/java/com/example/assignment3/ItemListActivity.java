@@ -1,12 +1,13 @@
 package com.example.assignment3;
 
-import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
@@ -18,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.assignment3.dummy.DummyContent;
 
@@ -73,7 +73,8 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.IMAGE_ITEMS, mTwoPane));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.IMAGE_ITEMS,
+                Arrays.asList(getResources().getStringArray(R.array.images)), mTwoPane));
     }
 
     public static class SimpleItemRecyclerViewAdapter
@@ -81,15 +82,19 @@ public class ItemListActivity extends AppCompatActivity {
 
         private final ItemListActivity mParentActivity;
         private final List<DummyContent.ImageItem> mValues;
+        private final List<String> IMAGE_PATHS;
         private final boolean mTwoPane;
+
 
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DummyContent.ImageItem item = (DummyContent.ImageItem) view.getTag();
+                item.imagePath = IMAGE_PATHS.get(Integer.parseInt(item.id) - 1);
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.id);
+                    arguments.putString(ItemDetailFragment.ARG_IMAGE_PATH, item.imagePath);
                     ItemDetailFragment fragment = new ItemDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -107,9 +112,11 @@ public class ItemListActivity extends AppCompatActivity {
 
         SimpleItemRecyclerViewAdapter(ItemListActivity parent,
                                       List<DummyContent.ImageItem> items,
+                                      List<String> imagePaths,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
+            IMAGE_PATHS = imagePaths;
             mTwoPane = twoPane;
         }
 
