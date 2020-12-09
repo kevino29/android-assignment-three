@@ -13,4 +13,5 @@
         <item>pexels_ready_made_4297820.jpg</item>
         <item>pexels_stephane_navailles_3415410.jpg</item>
     </string-array>
+    <string name="image_description">This image is from pexels.com</string>
 </resources>

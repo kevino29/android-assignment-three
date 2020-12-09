@@ -31,7 +31,7 @@ public class DummyContent {
 
     static {
         // Add some sample items.
-        for (int i = 0; i < COUNT; i++) {
+        for (int i = 1; i <= COUNT; i++) {
             addItem(createDummyItem(i));
         }
     }
@@ -42,7 +42,7 @@ public class DummyContent {
     }
 
     private static ImageItem createDummyItem(int position) {
-        return new ImageItem(String.valueOf(position), "Item " + (position + 1));
+        return new ImageItem(String.valueOf(position), "Item " + (position));
     }
 
     /**
@@ -51,10 +51,12 @@ public class DummyContent {
     public static class ImageItem {
         public final String id;
         public final String content;
+        public String imagePath;
 
         public ImageItem(String id, String content) {
             this.id = id;
             this.content = content;
+            this.imagePath = "";
         }
 
         @Override
