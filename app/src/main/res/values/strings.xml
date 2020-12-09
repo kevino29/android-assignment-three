@@ -2,16 +2,16 @@
     <string name="app_name">Assignment3</string>
     <string name="title_item_detail">Item Detail</string>
     <string-array name="images">
-        <item>pexels_anna_urlapova_2968780.jpg</item>
-        <item>pexels_daniela_constantini_5591724.jpg</item>
-        <item>pexels_evie_shaffer_2512386.jpg</item>
-        <item>pexels_khoa_v_5430083.jpg</item>
-        <item>pexels_luiisrtz_1699290.jpg</item>
-        <item>pexels_maksim_goncharenok_5995311.jpg</item>
-        <item>pexels_marta_dzedyshko_2775859.jpg</item>
-        <item>pexels_pat_whelen_5614594.jpg</item>
-        <item>pexels_ready_made_4297820.jpg</item>
-        <item>pexels_stephane_navailles_3415410.jpg</item>
+        <item>pexels_anna_urlapova_2968780</item>
+        <item>pexels_daniela_constantini_5591724</item>
+        <item>pexels_evie_shaffer_2512386</item>
+        <item>pexels_khoa_v_5430083</item>
+        <item>pexels_luiisrtz_1699290</item>
+        <item>pexels_maksim_goncharenok_5995311</item>
+        <item>pexels_marta_dzedyshko_2775859</item>
+        <item>pexels_pat_whelen_5614594</item>
+        <item>pexels_ready_made_4297820</item>
+        <item>pexels_stephane_navailles_3415410</item>
     </string-array>
     <string name="image_description">This image is from pexels.com</string>
 </resources>
