@@ -1,14 +1,12 @@
 package com.example.assignment3;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
@@ -24,7 +22,9 @@ import android.widget.TextView;
 import com.example.assignment3.dummy.DummyContent;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * An activity representing a list of Items. This activity
@@ -41,11 +41,20 @@ public class ItemListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+    public static final String PICKED_ITEMS = "picked_items";
+    public static final String PREFERENCES = "preferences";
+    private Set<String> pickedItems = new HashSet<>();
+    private Set<String> newlyPickedItems = new HashSet<>();
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
+
+//        sharedPreferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+//        sharedPreferences = getPreferences(MODE_PRIVATE);
+//        pickedItems = sharedPreferences.getStringSet(PICKED_ITEMS, null);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,7 +87,7 @@ public class ItemListActivity extends AppCompatActivity {
                 Arrays.asList(getResources().getStringArray(R.array.images)), mTwoPane));
     }
 
-    public static class SimpleItemRecyclerViewAdapter
+    public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final ItemListActivity mParentActivity;
@@ -90,8 +99,6 @@ public class ItemListActivity extends AppCompatActivity {
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.setEnabled(false);
-                view.setBackgroundColor(Color.GRAY);
                 DummyContent.ImageItem item = (DummyContent.ImageItem) view.getTag();
                 item.imagePath = IMAGE_PATHS.get(Integer.parseInt(item.id) - 1);
                 if (mTwoPane) {
@@ -111,6 +118,17 @@ public class ItemListActivity extends AppCompatActivity {
 
                     context.startActivity(intent);
                 }
+                view.setEnabled(false);
+                view.setBackgroundColor(Color.GRAY);
+
+                if (pickedItems != null && newlyPickedItems.size() == 0) {
+                    newlyPickedItems.addAll(pickedItems);
+                }
+
+                newlyPickedItems.add(item.id);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putStringSet(PICKED_ITEMS, newlyPickedItems);
+                editor.apply();
             }
         };
 
@@ -135,6 +153,18 @@ public class ItemListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mIdView.setText(mValues.get(position).id);
             holder.mContentView.setText(mValues.get(position).content);
+
+            sharedPreferences = getPreferences(MODE_PRIVATE);
+            pickedItems = sharedPreferences.getStringSet(PICKED_ITEMS, new HashSet<>());
+
+            if (pickedItems != null) {
+                for (String pickedItem : pickedItems) {
+                    if (Integer.parseInt(pickedItem) == position + 1) {
+                        holder.itemView.setEnabled(false);
+                        holder.itemView.setBackgroundColor(Color.GRAY);
+                    }
+                }
+            }
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
