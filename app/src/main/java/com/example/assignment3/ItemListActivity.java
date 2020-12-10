@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -89,12 +90,15 @@ public class ItemListActivity extends AppCompatActivity {
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.setEnabled(false);
+                view.setBackgroundColor(Color.GRAY);
                 DummyContent.ImageItem item = (DummyContent.ImageItem) view.getTag();
                 item.imagePath = IMAGE_PATHS.get(Integer.parseInt(item.id) - 1);
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.id);
                     arguments.putString(ItemDetailFragment.ARG_IMAGE_PATH, item.imagePath);
+                    arguments.putBoolean(ItemDetailFragment.IS_TWO_PANE, true);
                     ItemDetailFragment fragment = new ItemDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
