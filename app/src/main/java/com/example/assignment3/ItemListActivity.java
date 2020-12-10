@@ -1,8 +1,6 @@
 package com.example.assignment3;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,17 +12,12 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 
 import com.example.assignment3.dummy.DummyContent;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * An activity representing a list of Items. This activity
@@ -42,9 +35,8 @@ public class ItemListActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
     public static final String PICKED_ITEMS = "picked_items";
-    public static final String PREFERENCES = "preferences";
     private Set<String> pickedItems = new HashSet<>();
-    private Set<String> newlyPickedItems = new HashSet<>();
+    private final Set<String> newlyPickedItems = new HashSet<>();
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -52,10 +44,7 @@ public class ItemListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
 
-//        sharedPreferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
-//        sharedPreferences = getPreferences(MODE_PRIVATE);
-//        pickedItems = sharedPreferences.getStringSet(PICKED_ITEMS, null);
-
+        sharedPreferences = getPreferences(MODE_PRIVATE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
@@ -154,7 +143,6 @@ public class ItemListActivity extends AppCompatActivity {
             holder.mIdView.setText(mValues.get(position).id);
             holder.mContentView.setText(mValues.get(position).content);
 
-            sharedPreferences = getPreferences(MODE_PRIVATE);
             pickedItems = sharedPreferences.getStringSet(PICKED_ITEMS, new HashSet<>());
 
             if (pickedItems != null) {
